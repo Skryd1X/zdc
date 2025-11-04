@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================== Base ================== */
+@layer base {
+  html { color-scheme: dark; scroll-behavior: smooth; }
+  body { @apply bg-dt-bg text-dt-text; font-family: 'Inter', sans-serif; line-height: 1.6; }
+
+  h1, h2, h3, h4, h5, h6 { font-family: 'Anton', sans-serif; letter-spacing: -0.01em; }
+  h1 { @apply text-h1; }
+  h2 { @apply text-h2; }
+  h3 { @apply text-h3; }
+
+  /* Видео героя всегда видно */
+  .hero-video{
+    display:block; width:100%; height:100%; object-fit:cover;
+    opacity:1; transform:translateZ(0); will-change:transform; background:#000;
+  }
+
+  :root { --dt-cyan:#11d5c8; } /* бирюза, как цвет номера */
+}
+
+@layer utilities{
+  @media (prefers-reduced-motion: reduce){ .hero-video{ display:block; } }
+}
+
+/* ================== Components ================== */
+@layer components {
+  .section { @apply py-20 lg:py-32; }
+  .container-dt { @apply container mx-auto px-4 lg:px-8; }
+
+  /* Кнопки — постоянный бирюзовый контур + лёгкий бирюзовый glow при hover/focus */
+  .btn {
+    @apply px-6 py-3 rounded-lg font-semibold uppercase text-sm tracking-wide transition-all duration-300 hover:scale-105;
+    border:2px solid var(--dt-cyan);
+  }
+  .btn-primary { @apply btn text-dt-bg; background: theme('colors.dt.cta'); }
+  .btn-secondary { @apply btn text-dt-text; background: transparent; }
+  .btn-primary:hover,.btn-secondary:hover,
+  .btn-primary:focus-visible,.btn-secondary:focus-visible{ box-shadow:0 0 22px rgba(17,213,200,.28); }
+
+  .card { @apply p-6 bg-dt-surface border border-dt-line rounded-lg transition-all duration-300; }
+  .card-hover { @apply card hover:border-dt-accent hover:shadow-soft; }
+
+  .chip { @apply px-3 py-1.5 text-sm font-medium bg-dt-surface border border-dt-line rounded-full text-dt-muted; }
+  .chip-accent { @apply chip border-dt-accent text-dt-accent; }
+
+  .h-divider { @apply h-px bg-gradient-to-r from-transparent via-dt-line to-transparent; }
+  .link-accent { @apply text-dt-accent hover:text-dt-accent2 transition-colors duration-200; }
+
+  .reveal { @apply opacity-0; animation: reveal .6s ease-out forwards; }
+  .reveal-delay-1 { animation-delay:.04s; }
+  .reveal-delay-2 { animation-delay:.08s; }
+  .reveal-delay-3 { animation-delay:.12s; }
+
+  @keyframes reveal { from{opacity:0; transform:translateY(24px)} to{opacity:1; transform:translateY(0)} }
+
+  .parallax { background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; }
+
+  /* ---------- HERO TITLE ---------- */
+  .hero-title{ will-change:transform; transition:transform .25s ease; }
+  .group:hover .hero-title{ transform:scale(1.05); }
+
+  .hero-kicker{ transition:opacity .2s ease; }
+  .group:hover .hero-kicker,
+  .group:focus-within .hero-kicker{ opacity:0; }
+
+  .hero-title__fill{
+    @apply block text-h1;
+    color:#f3f4f6;
+    position:relative; z-index:2;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .hero-title__stroke{
+    position:absolute; inset:0; pointer-events:none; z-index:1;
+    color:transparent;
+    -webkit-text-stroke:1.25px rgba(0,0,0,.95);
+    text-shadow:
+      0 0 0 #000,
+      1px 0 0 #000, -1px 0 0 #000,
+      0 1px 0 #000, 0 -1px 0 #000,
+      1px 1px 0 #000, -1px -1px 0 #000,
+      1px -1px 0 #000, -1px 1px 0 #000;
+  }
+
+  .hero-title__glow{
+    position:absolute; inset:0; pointer-events:none; z-index:0;
+    color:transparent;
+    text-shadow:
+      0 0 14px rgba(17,213,200,.45),
+      0 0 28px rgba(17,213,200,.25);
+  }
+
+  /* Кнопки с иконкой (соцсети) */
+  .icon-btn { @apply inline-flex items-center gap-2 btn-secondary text-sm; }
+  .icon-btn svg { @apply w-4 h-4 opacity-80; }
+  .icon-btn:hover svg { @apply opacity-100; }
+
+  /* ---------- MEDIA (портфолио + видео) ---------- */
+  /* Единая заметная бирюзовая рамка — всегда видна (в т.ч. на тёмном фоне) */
+  .media-frame{
+    position: relative;
+    border: 2px solid var(--dt-cyan) !important;
+    border-radius: 0.75rem;           /* ≈ rounded-lg */
+    overflow: hidden;
+    background: rgba(255,255,255,.03);
+    box-shadow:
+      0 0 0 1px rgba(17,213,200,.18) inset,   /* тонкий inner-контур */
+      0 0 12px rgba(17,213,200,.06);          /* лёгкое свечение */
+  }
+  /* Фокус для кликабельных плиток (если это <button>/<a>) */
+  .media-frame:focus-visible{
+    outline: none;
+    box-shadow:
+      0 0 0 2px rgba(17,213,200,.55),
+      0 0 0 1px rgba(17,213,200,.18) inset,
+      0 0 12px rgba(17,213,200,.06);
+  }
+  /* Картинка внутри плитки */
+  .media-img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    transition: transform .5s ease;
+  }
+  .media-frame:hover .media-img{ transform: scale(1.06); }
+
+  /* Оверлей под постер YouTube с кнопкой Play (если используешь постер) */
+  .media-overlay{
+    position:absolute; inset:0;
+    background: rgba(0,0,0,.30);
+    transition: background .2s ease;
+  }
+  .media-frame:hover .media-overlay{ background: rgba(0,0,0,.40); }
+
+  .media-play{
+    position:absolute; inset:0; display:grid; place-items:center;
+  }
+  .media-play__btn{
+    width:64px; height:64px; border-radius:9999px;
+    background:#fff; display:grid; place-items:center;
+    transition: background .2s ease, transform .2s ease;
+  }
+  .media-frame:hover .media-play__btn{ background:#fff; transform: scale(1.04); }
+
+  /* ---------- CUSTOM VIDEO PLAYER: ползунок громкости ---------- */
+  .dt-range {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+  }
+  .dt-range:focus { outline: none; }
+
+  /* трек */
+  .dt-range::-webkit-slider-runnable-track {
+    height: 8px;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, rgba(13,236,219,.9), rgba(132,106,255,.85));
+    box-shadow: 0 0 16px rgba(132,106,255,.35), inset 0 0 0 2px rgba(0,0,0,.35);
+  }
+  .dt-range::-moz-range-track {
+    height: 8px;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, rgba(13,236,219,.9), rgba(132,106,255,.85));
+    box-shadow: 0 0 16px rgba(132,106,255,.35), inset 0 0 0 2px rgba(0,0,0,.35);
+  }
+
+  /* ползунок */
+  .dt-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px; height: 18px;
+    border-radius: 9999px;
+    background: #0DECDB;
+    border: 2px solid rgba(255,255,255,.85);
+    box-shadow:
+      0 0 20px rgba(13,236,219,.65),
+      0 0 36px rgba(132,106,255,.45);
+    margin-top: -5px; /* выравнивание */
+    cursor: pointer;
+  }
+  .dt-range::-moz-range-thumb {
+    width: 18px; height: 18px;
+    border-radius: 9999px;
+    background: #0DECDB;
+    border: 2px solid rgba(255,255,255,.85);
+    box-shadow:
+      0 0 20px rgba(13,236,219,.65),
+      0 0 36px rgba(132,106,255,.45);
+    cursor: pointer;
+  }
+}
+
+/* ================== Misc Utilities ================== */
+@layer utilities {
+  ::-webkit-scrollbar { width:8px; }
+  ::-webkit-scrollbar-track { background:hsl(from var(--bg) h s l / 1); }
+  ::-webkit-scrollbar-thumb { background: theme('colors.dt.line'); border-radius:4px; }
+  ::-webkit-scrollbar-thumb:hover { background: theme('colors.dt.accent'); }
+}

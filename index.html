@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+
+    <!-- Favicon / PWA -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#846AFF" />
+    <meta name="msapplication-TileColor" content="#0D0E10" />
+    <meta name="application-name" content="Double Touch Show" />
+    <meta name="apple-mobile-web-app-title" content="Double Touch Show" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="manifest" href="/site.webmanifest" />
+    <!-- Две темы под системный режим -->
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0D0E10" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#0D0E10" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Title / Description -->
+    <title>Double Touch Show — танцевальные шоу, промо и события</title>
+    <meta
+      name="description"
+      content="Профессиональный танцевальный коллектив: корпоративные и частные события, промо, флешмобы, постановки под бренд. 20+ лет опыта. Hip-hop, experimental, show программы."
+    />
+    <meta name="robots" content="index,follow" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://doubletouch.uz/" />
+    <!-- Hreflang (если будет EN — уже готово) -->
+    <link rel="alternate" href="https://doubletouch.uz/" hreflang="ru" />
+    <link rel="alternate" href="https://doubletouch.uz/" hreflang="ru-UZ" />
+    <link rel="alternate" href="https://doubletouch.uz/" hreflang="x-default" />
+
+    <!-- OpenGraph -->
+    <meta property="og:site_name" content="Double Touch Show" />
+    <meta property="og:title" content="Double Touch Show" />
+    <meta
+      property="og:description"
+      content="Профессиональный танцевальный коллектив. Корпоративные события, промо, шоу, флешмобы."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://doubletouch.uz/" />
+    <!-- Абсолютная ссылка важна для соцсетей -->
+    <meta property="og:image" content="https://doubletouch.uz/og-doubletouch.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Double Touch Show — танцевальное шоу" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Double Touch Show" />
+    <meta
+      name="twitter:description"
+      content="Профессиональный танцевальный коллектив. Корпоративные события, промо, шоу."
+    />
+    <meta name="twitter:image" content="https://doubletouch.uz/og-doubletouch.jpg" />
+    <meta name="twitter:image:alt" content="Double Touch Show — танцевальное шоу" />
+
+    <!-- Performance: preload того, что попадает во фолд -->
+    <link rel="preload" as="image" href="/og-doubletouch.jpg" />
+    <link rel="preload" as="image" href="/media/videos/hero-poster.jpg" />
+    <link rel="preload" as="image" href="/logoDT1.png" />
+    <!-- Если оставляешь preload видео, то в <video> не ставь preload="auto" -->
+    <link rel="preload" as="video" href="/media/videos/hero.webm" type="video/webm" />
+    <link rel="preload" as="video" href="/media/videos/hero.mp4" type="video/mp4" />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "PerformingGroup",
+        "name": "Double Touch Show",
+        "url": "https://doubletouch.uz/",
+        "logo": "https://doubletouch.uz/favicon-32.png",
+        "image": "https://doubletouch.uz/og-doubletouch.jpg",
+        "description": "Профессиональный танцевальный коллектив для брендов и частных событий: промо, шоу, флешмобы, постановки под бренд.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Ташкент",
+          "streetAddress": "Zlotnikov Dance Center"
+        },
+        "contactPoint": [{
+          "@type": "ContactPoint",
+          "contactType": "Booking",
+          "telephone": "+998993654432",
+          "email": "doubletouchshow1@gmail.com"
+        }],
+        "sameAs": [
+          "https://instagram.com/doubletouch_show",
+          "https://t.me/doubletouchshow1"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <noscript>Для корректной работы сайта необходимо включить JavaScript.</noscript>
+  </body>
+</html>
